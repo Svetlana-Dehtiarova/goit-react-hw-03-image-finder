@@ -8,12 +8,12 @@ class Searchbar extends Component {
   state = { searchQuery: '' };
 
   handleChange = e => {
-    this.setState({ searchQuery: e.currentTarget.value.toLowerCase() });
+    this.setState({ searchQuery: e.currentTarget.value });
   };
 
   handleSubmit = e => {
     e.preventDefault();
-    const query = this.state.searchQuery.trim();
+    const query = this.state.searchQuery.toLowerCase().trim();
 
     if (query === '') {
       return Notify.warning('Пожалуйста введите запрос!');

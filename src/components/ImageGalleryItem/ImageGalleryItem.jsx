@@ -2,9 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import s from './ImageGalleryItem.module.css';
 
-export default function ImageGalleryItem({ smallImg, id, openModal }) {
+export default function ImageGalleryItem({ smallImg, onClick, largeImageURL }) {
   return (
-    <li className={s.item} onClick={() => openModal(id)}>
+    <li className={s.item} onClick={() => onClick(largeImageURL)}>
       <img className={s.itemImage} src={smallImg} alt="" />
     </li>
   );
@@ -12,6 +12,6 @@ export default function ImageGalleryItem({ smallImg, id, openModal }) {
 
 ImageGalleryItem.propTypes = {
   smallImg: PropTypes.string.isRequired,
-  id: PropTypes.number.isRequired,
-  openModal: PropTypes.func.isRequired,
+  onClick: PropTypes.func.isRequired,
+  largeImageUrl: PropTypes.string,
 };

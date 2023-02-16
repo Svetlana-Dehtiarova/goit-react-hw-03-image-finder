@@ -33,11 +33,8 @@ export class App extends Component {
     this.setState({
       images: [],
       searchQuery: query,
-      largeImageURL: '',
       currentPage: 1,
       total: 0,
-      showModal: false,
-      loading: false,
       error: null,
     });
   };
@@ -85,9 +82,13 @@ export class App extends Component {
     }));
   };
 
-  openModal = searchId => {
-    const image = this.state.images.find(image => image.id === searchId);
-    this.setState({ largeImageURL: image.largeImageURL });
+  openModal = largeImageURL => {
+    this.setState({ largeImageURL });
+    this.toggleModal();
+  };
+
+  closeModal = () => {
+    this.setState({ largeImageURL: null });
     this.toggleModal();
   };
 
@@ -99,7 +100,7 @@ export class App extends Component {
         <Searchbar onSubmit={this.handleFormSubmit} />
 
         {images.length > 0 && (
-          <ImageGallery images={images} openModal={this.openModal} />
+          <ImageGallery images={images} onClick={this.openModal} />
         )}
 
         {loading && <Loader />}
@@ -110,7 +111,7 @@ export class App extends Component {
             <Button onClick={this.loadMore} />
           )}
         {showModal && (
-          <Modal onClose={this.toggleModal} largeImage={largeImageURL} />
+          <Modal onClose={this.closeModal} largeImage={largeImageURL} />
         )}
       </div>
     );
